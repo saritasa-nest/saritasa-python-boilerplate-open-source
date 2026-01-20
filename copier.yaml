@@ -1,0 +1,25 @@
+package_name:
+  type: str
+  help: Enter name of package which will be used in PyPI
+
+folder_name:
+  type: str
+  help: Enter package's folder name (which will be used as importable module name)
+  default: "{{ package_name|replace('-', '_') }}"
+
+package_description:
+  type: str
+  help: Enter short description of package
+
+min_python_version:
+  type: str
+  help: What is minimum supported version of Python?
+  default: 3.12
+
+_subdirectory: "template"
+_templates_suffix: ""
+_tasks:
+  - >-
+  - git init
+  - uv venv --prompt {{ package_name }}
+  - . .venv/bin/activate && uv sync --all-groups
