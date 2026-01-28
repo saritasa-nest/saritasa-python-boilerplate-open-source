@@ -1,0 +1,23 @@
+{
+  "ignorePaths": [
+    ".gitignore",
+    ".tmp"
+  ],
+  "ignoreRegExpList": [
+    "GHSA-.+"
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "project-related-words",
+      "path": "../template/.vscode/boilerplate-words.txt",
+      "addWords": true
+    }
+  ],
+  "dictionaries": [
+    "python",
+    "python-common",
+    "docker",
+    "project-related-words"
+  ],
+  "useGitignore": true
+}

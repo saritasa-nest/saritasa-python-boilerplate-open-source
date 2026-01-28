@@ -1,0 +1,4 @@
+# YAML linting configuration
+# Rule reference: https://yamllint.readthedocs.io/en/stable/rules.html
+
+extends: template/.yamllint
