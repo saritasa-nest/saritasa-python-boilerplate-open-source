@@ -1,0 +1,51 @@
+name: Run pre-commit
+description: "Setup ci and run pre-commit."
+inputs:
+  python-version:
+    description: "Version of python"
+    required: false
+    default: ""
+  setup-ci-cmd:
+    description: "CMD to setup ci env"
+    required: false
+    default: "uv run inv ci.prepare"
+  run-pre-commit-cmd:
+    description: "Command to run pre-commit hooks"
+    required: false
+    default: "uv run inv ci.run-pre-commit"
+  is-origin-repo:
+    description: Is it run on origin repo(To run action via file path, instead of git ref)
+    required: false
+    default: "false"
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
+    # Can be removed one this is fixed
+    # https://github.com/actions/checkout/issues/2219
+    - name: Set up git references
+      shell: bash
+      run: git remote set-head origin --auto
+    # Uncomment once this is merged
+    # - name: Setup python
+    #   if: inputs.is-origin-repo == 'false'
+    #   uses: saritasa-nest/saritasa-python-open-source-boilerplate/.github/actions/setup_python@main
+    #   with:
+    #     version: ${{ inputs.python-version }}
+    - name: Setup python
+      if: inputs.is-origin-repo == 'true'
+      uses: ./.github/actions/setup_python
+      with:
+        version: ${{ inputs.python-version }}
+    - name: Prepare CI env
+      shell: bash
+      run: |
+        ${{ inputs.setup-ci-cmd }}
+    - name: Run pre-commit hooks
+      shell: bash
+      env:
+        BASE_BRANCH: origin/${{ github.base_ref || 'HEAD~1'}}
+      run: |
+        ${{ inputs.run-pre-commit-cmd }}

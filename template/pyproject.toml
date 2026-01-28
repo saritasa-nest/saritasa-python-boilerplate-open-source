@@ -1,0 +1,175 @@
+[project]
+name = "{{ package_name }}"
+version = "0.0.0"
+description = ""
+authors = [
+    {name = "Saritasa", email = "pypi@saritasa.com"}
+]
+maintainers = [
+]
+keywords = [
+  "python",
+]
+license = "MIT"
+readme = "README.md"
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">={{ min_python_version }}"
+dependencies = [
+]
+
+[dependency-groups]
+local = [
+    "ipython<10.0.0",
+    # Exports functions to access the IPython debugger, which features tab completion, syntax highlighting, better tracebacks
+    # https://github.com/gotcha/ipdb
+    "ipdb<0.14.0",
+    # A framework for managing and maintaining multi-language pre-commit hooks.
+    # https://pre-commit.com/
+    "pre-commit<5.0"
+]
+linters = [
+    # Mypy is a static type checker for Python.
+    # https://mypy.readthedocs.io/en/stable/
+    "mypy<2.0.0",
+]
+
+[project.urls]
+Homepage = "https://pypi.org/project/{{ package_name }}/"
+Documentation = "https://{{ package_name }}.readthedocs.io/en/latest/"
+Repository = "https://github.com/saritasa-nest/{{ package_name }}/"
+Changelog = "https://github.com/saritasa-nest/{{ package_name }}//blob/main/CHANGELOG.md"
+
+[tool.ruff]
+line-length = 79
+indent-width = 4
+
+[tool.ruff.lint]
+extend-select = [
+  # https://docs.astral.sh/ruff/rules/#pycodestyle-e-w
+  "W",
+  "E",
+  # https://docs.astral.sh/ruff/rules/#mccabe-c90
+  "C90",
+  # https://docs.astral.sh/ruff/rules/#isort-i
+  "I",
+  # https://docs.astral.sh/ruff/rules/#pep8-naming-n
+  "N",
+  # https://docs.astral.sh/ruff/rules/#pydocstyle-d
+  "D",
+  # https://docs.astral.sh/ruff/rules/#pyupgrade-up
+  "UP",
+  # https://docs.astral.sh/ruff/rules/#flake8-annotations-ann
+  "ANN",
+  # https://docs.astral.sh/ruff/rules/#flake8-bandit-s
+  "S",
+  # https://docs.astral.sh/ruff/rules/#flake8-bugbear-b
+  "B",
+  # https://docs.astral.sh/ruff/rules/#flake8-builtins-a
+  "A",
+  # https://docs.astral.sh/ruff/rules/#flake8-commas-com
+  "COM",
+  # https://docs.astral.sh/ruff/rules/#flake8-comprehensions-c4
+  "C4",
+  # https://docs.astral.sh/ruff/rules/#flake8-datetimez-dtz
+  "DTZ",
+  # https://docs.astral.sh/ruff/rules/#flake8-debugger-t10
+  "T10",
+  # https://docs.astral.sh/ruff/rules/#flake8-print-t20
+  "T20",
+  # https://docs.astral.sh/ruff/rules/#flake8-pytest-style-pt
+  "PT",
+  # https://docs.astral.sh/ruff/rules/#flake8-simplify-sim
+  "SIM",
+  # https://docs.astral.sh/ruff/rules/#flake8-use-pathlib-pth
+  "PTH",
+  # https://docs.astral.sh/ruff/rules/#flake8-todos-td
+  "TD",
+  # https://docs.astral.sh/ruff/rules/#eradicate-era
+  "ERA",
+  # https://docs.astral.sh/ruff/rules/#tryceratops-try
+  "TRY",
+  # https://docs.astral.sh/ruff/rules/#flynt-fly
+  "FLY",
+  # https://docs.astral.sh/ruff/rules/#perflint-perf
+  "PERF",
+  # https://docs.astral.sh/ruff/rules/#refurb-furb
+  "FURB",
+  # https://docs.astral.sh/ruff/rules/#flake8-pie-pie
+  "PIE",
+  # https://docs.astral.sh/ruff/rules/#flake8-async-async
+  "ASYNC",
+  # https://docs.astral.sh/ruff/rules/#ruff-specific-rules-ruf
+  "RUF",
+]
+ignore = [
+  # https://docs.astral.sh/ruff/rules/any-type
+  "ANN401",
+  # https://docs.astral.sh/ruff/rules/missing-type-kwargs
+  "ANN003",
+  # https://docs.astral.sh/ruff/rules/undocumented-public-module
+  "D100",
+  # https://docs.astral.sh/ruff/rules/undocumented-public-package
+  "D104",
+  # https://docs.astral.sh/ruff/rules/undocumented-public-nested-class
+  "D106",
+  # https://docs.astral.sh/ruff/rules/undocumented-public-init
+  "D107",
+  # https://docs.astral.sh/ruff/rules/raise-vanilla-args
+  "TRY003",
+  # https://docs.astral.sh/ruff/rules/try-consider-else
+  "TRY300",
+]
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = [
+  # https://docs.astral.sh/ruff/rules/unused-import
+  "F401",
+]
+"**/tests/*" = [
+  # https://docs.astral.sh/ruff/rules/assert
+  "S101",
+  # https://docs.astral.sh/ruff/rules/hardcoded-password-func-arg
+  "S106",
+  # https://docs.astral.sh/ruff/rules/suspicious-non-cryptographic-random-usage
+  "S311",
+]
+"**/test_*" = [
+  # https://docs.astral.sh/ruff/rules/missing-return-type-undocumented-public-function
+  "ANN201",
+]
+[tool.ruff.lint.isort]
+force-wrap-aliases = true
+split-on-trailing-comma = true
+section-order = [
+    "future",
+    "standard-library",
+    "third-party",
+    "first-party",
+    "local-folder",
+]
+
+[tool.ruff.lint.flake8-pytest-style]
+fixture-parentheses = false
+parametrize-names-type = "list"
+parametrize-values-type = "list"
+parametrize-values-row-type = "list"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.mypy]
+# https://mypy.readthedocs.io/en/stable/running_mypy.html#missing-imports
+ignore_missing_imports = true
+strict = false
+warn_no_return = false
+check_untyped_defs = true
+disallow_any_generics = true
+exclude = "venv|/.venv"

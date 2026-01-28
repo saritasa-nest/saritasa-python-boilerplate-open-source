@@ -1,0 +1,24 @@
+name: Report action failure
+description: "Create issue and link action run."
+inputs:
+  github-token:
+    description: "Token for Github API"
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - uses: JasonEtco/create-an-issue@v2
+      id: create-issue-about-failure
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        ACTION_NAME: ${{ github.workflow }}
+        LATEST_FAIL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      with:
+        filename: .github/actions_issue_template.md
+        update_existing: true
+    - uses: peter-evans/create-or-update-comment@v5
+      with:
+        issue-number: ${{ steps.create-issue-about-failure.outputs.number }}
+        body: |
+          Failed run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        reactions: "confused"
