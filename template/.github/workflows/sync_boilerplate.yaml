@@ -19,7 +19,6 @@ jobs:
       - name: Run
         uses: saritasa-nest/saritasa-python-open-source-boilerplate/.github/actions/sync_boilerplate@main
         with:
-          boilerplate-ssh: ${{ '{{' }} secrets.DJANGO_BOILERPLATE_PRIVATE_KEY }}
           app-id: ${{ '{{' }} secrets.SARITASA_GITHUB_BOT_ID }}
           app-private-key: ${{ '{{' }} secrets.SARITASA_GITHUB_BOT_PRIVATE_KEY }}
       - name: Report failure

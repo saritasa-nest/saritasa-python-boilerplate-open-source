@@ -14,7 +14,7 @@ inputs:
     required: false
     default: ""
   boilerplate-ssh:
-    description: "SSH Key to access boilerplate"
+    description: "SSH Key to access boilerplate(if needed)"
     required: false
     default: ""
   app-id:
