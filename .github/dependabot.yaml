@@ -25,3 +25,15 @@ updates:
       pre-commit:
         patterns:
           - "*"
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: monthly
+      time: "00:00"
+    groups:
+      pip:
+        patterns:
+          - "*"
+    allow:
+      - dependency-name: "*"
+        dependency-type: "all"
