@@ -44,7 +44,9 @@ runs:
       with:
         enable-cache: true
         cache-dependency-glob: "uv.lock"
+        activate-environment: "true"
+        cache-python: "true"
     - name: Sync dependencies
       shell: bash
-      if: steps.cache-venv.cache-hit != 'true'
+      if: steps.setup-uv.cache-hit != 'true'
       run: uv sync --locked --all-groups --verbose
