@@ -1,0 +1,27 @@
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directories:
+      - "/.github/workflows"
+      - "/.github/actions/**/"
+      - "template/.github/workflows"
+      - "template/.github/actions/**/"
+    schedule:
+      interval: monthly
+      time: "00:00"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+  - package-ecosystem: pre-commit
+    directories:
+      - "/.pre-commit-config.yaml"
+      - "template/.pre-commit-config.yaml"
+    schedule:
+      interval: monthly
+      time: "00:00"
+    groups:
+      pre-commit:
+        patterns:
+          - "*"

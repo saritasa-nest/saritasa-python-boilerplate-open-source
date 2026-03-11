@@ -25,18 +25,18 @@ dependencies = [
 
 [dependency-groups]
 local = [
-    "ipython<10.0.0",
+    "ipython>0",
     # Exports functions to access the IPython debugger, which features tab completion, syntax highlighting, better tracebacks
     # https://github.com/gotcha/ipdb
-    "ipdb<0.14.0",
+    "ipdb>0",
     # A framework for managing and maintaining multi-language pre-commit hooks.
     # https://pre-commit.com/
-    "pre-commit<5.0"
+    "pre-commit>0"
 ]
 linters = [
     # Mypy is a static type checker for Python.
     # https://mypy.readthedocs.io/en/stable/
-    "mypy<2.0.0",
+    "mypy>0",
 ]
 
 [project.urls]
