@@ -21,5 +21,8 @@ _templates_suffix: ""
 _tasks:
   - >-
   - git init
+  - cd docs && ln -sf ../README.md index.md
+  - cd docs && ln -sf ../CHANGELOG.md changelog.md
+  - cd docs && ln -sf ../CONTRIBUTING.md contributing.md
   - uv venv --prompt {{ package_name }}
   - . .venv/bin/activate && uv sync --all-groups

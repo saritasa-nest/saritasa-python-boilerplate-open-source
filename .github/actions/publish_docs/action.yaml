@@ -1,0 +1,26 @@
+name: Publish latest documentation to GitHub Pages
+description: "Publish the latest documentation to GitHub Pages."
+inputs:
+  python-version:
+    description: "Version of python"
+    required: false
+    default: ""
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v6
+    - name: Configure Git Credentials
+      shell: bash
+      # Set git user for commits
+      # Email: ID+USERNAME@users.noreply.github.com
+      # https://api.github.com/users/github-actions[bot]
+      run: |
+        git config user.name github-actions[bot]
+        git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+    - name: Setup python
+      uses: saritasa-nest/saritasa-python-open-source-boilerplate/.github/actions/setup_python@main
+      with:
+        version: ${{ inputs.python-version }}
+    - name: Build and deploy documentation to GitHub Pages
+      shell: bash
+      run: uv run mkdocs gh-deploy --force

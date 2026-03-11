@@ -14,13 +14,18 @@ runs:
     - uses: actions/checkout@v6
       with:
         fetch-depth: 0
-    - name: Set up Python
-      uses: actions/setup-python@v6
+    - name: Configure Git Credentials
+      shell: bash
+      # Set git user for commits
+      # Email: ID+USERNAME@users.noreply.github.com
+      # https://api.github.com/users/github-actions[bot]
+      run: |
+        git config user.name github-actions[bot]
+        git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+    - name: Setup python
+      uses: saritasa-nest/saritasa-python-open-source-boilerplate/.github/actions/setup_python@main
       with:
-        python-version: "${{ inputs.python-version }}"
-        python-version-file: "pyproject.toml"
-    - name: Install uv
-      uses: astral-sh/setup-uv@v7
+        version: ${{ inputs.python-version }}
     - name: Ensure tag matches pyproject version
       shell: bash
       run: |
@@ -35,6 +40,10 @@ runs:
     - name: Build
       shell: bash
       run: uv build
+    - name: Publish new docs version
+      shell: bash
+      run: |
+        uv run mike deploy --push --update-aliases {{  steps.version-check.outputs.package-version }} latest
     - name: Publish
       shell: bash
       run: uv publish

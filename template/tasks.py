@@ -5,6 +5,7 @@ import invocations
 
 ns = invoke.Collection(
     invocations.ci,
+    invocations.docs,
     invocations.project,
     saritasa_invocations.pytest,
     saritasa_invocations.poetry,
