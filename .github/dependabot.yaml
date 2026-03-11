@@ -15,8 +15,7 @@ updates:
         patterns:
           - "*"
   - package-ecosystem: pre-commit
-    directories:
-      - "**/.pre-commit-config.yaml"
+    directory: "/"
     schedule:
       interval: monthly
       time: "00:00"
