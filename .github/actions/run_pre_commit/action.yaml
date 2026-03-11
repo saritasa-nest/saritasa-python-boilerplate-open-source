@@ -28,12 +28,11 @@ runs:
     - name: Set up git references
       shell: bash
       run: git remote set-head origin --auto
-    # Uncomment once this is merged
-    # - name: Setup python
-    #   if: inputs.is-origin-repo == 'false'
-    #   uses: saritasa-nest/saritasa-python-open-source-boilerplate/.github/actions/setup_python@main
-    #   with:
-    #     version: ${{ inputs.python-version }}
+    - name: Setup python
+      if: inputs.is-origin-repo == 'false'
+      uses: saritasa-nest/saritasa-python-open-source-boilerplate/.github/actions/setup_python@main
+      with:
+        version: ${{ inputs.python-version }}
     - name: Setup python
       if: inputs.is-origin-repo == 'true'
       uses: ./.github/actions/setup_python

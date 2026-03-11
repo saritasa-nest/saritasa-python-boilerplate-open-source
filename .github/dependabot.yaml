@@ -15,7 +15,9 @@ updates:
         patterns:
           - "*"
   - package-ecosystem: pre-commit
-    directory: "/"
+    directories:
+      - "/"
+      - "/template"
     schedule:
       interval: monthly
       time: "00:00"

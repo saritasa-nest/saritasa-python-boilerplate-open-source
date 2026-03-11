@@ -47,4 +47,4 @@ runs:
     - name: Sync dependencies
       shell: bash
       if: steps.cache-venv.cache-hit != 'true'
-      run: uv sync --locked --all-groups
+      run: uv sync --locked --all-groups --verbose
