@@ -12,16 +12,18 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: Set up Python
-      id: install-python
-      uses: actions/setup-python@v6
+    - name: Install uv
+      id: setup-uv
+      uses: astral-sh/setup-uv@v7
       with:
-        python-version: "${{ inputs.version }}"
-        python-version-file: "pyproject.toml"
+        enable-cache: true
+        cache-dependency-glob: "uv.lock"
+        activate-environment: "true"
+        cache-python: "true"
     - name: Set cache prefix in env
       id: set-cache-prefix
       shell: bash
-      run: echo "cache-prefix=${{ runner.os }}-${{ github.job }}-${{ steps.install-python.outputs.python-version }}" >> $GITHUB_OUTPUT
+      run: echo "cache-prefix=${{ runner.os }}-${{ github.job }}-${{ steps.setup-uv.outputs.python-version }}" >> $GITHUB_OUTPUT
     - name: Cache venv
       id: cache-venv
       uses: actions/cache@v5
@@ -38,14 +40,6 @@ runs:
       with:
         path: "**/.mypy_cache"
         key: ${{ steps.set-cache-prefix.outputs.cache-prefix }}-mypy-${{ hashFiles('**/uv.lock') }}
-    - name: Install the default version of uv
-      id: setup-uv
-      uses: astral-sh/setup-uv@v7
-      with:
-        enable-cache: true
-        cache-dependency-glob: "uv.lock"
-        activate-environment: "true"
-        cache-python: "true"
     - name: Sync dependencies
       shell: bash
       if: steps.setup-uv.cache-hit != 'true'
