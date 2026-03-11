@@ -12,7 +12,7 @@ package_description:
   help: Enter short description of package
 
 min_python_version:
-  type: str
+  type: float
   help: What is minimum supported version of Python?
   default: 3.12
 

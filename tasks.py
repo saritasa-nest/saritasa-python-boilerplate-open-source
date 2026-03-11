@@ -4,6 +4,7 @@ import saritasa_invocations
 import invocations
 
 ns = invoke.Collection(
+    invocations.ci,
     invocations.test,
     saritasa_invocations.git,
     saritasa_invocations.poetry,

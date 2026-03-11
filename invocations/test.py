@@ -11,7 +11,7 @@ def create_from_template(
     package_name: str = "test-open-source-project",
     folder_name: str = "",
     package_description: str = "This is a short description of the package.",
-    min_python_version: str = "",
+    min_python_version: float = 0.0,
 ) -> None:
     """Test that can create project via copier."""
     saritasa_invocations.print_success(
@@ -22,7 +22,7 @@ def create_from_template(
     context.run("mkdir -p .tmp")
     if not min_python_version:
         with pathlib.Path("copier.yaml").open() as stream:
-            min_python_version = str(
+            min_python_version = float(
                 yaml.safe_load(stream)["min_python_version"]["default"],
             )
     if not folder_name:

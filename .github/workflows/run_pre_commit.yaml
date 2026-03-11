@@ -1,0 +1,36 @@
+name: Run pre-commit hooks
+
+on:
+  pull_request:
+  push:
+    branches: [
+      main,
+    ]
+  schedule:
+    # Run action at 21:00 UTC every Thursday https://crontab.guru/#0_21_*_*_4
+    - cron: '0 21 * * 4'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Fallback to plain text output for reducing docker output
+  # https://github.com/docker/compose/issues/8753#issuecomment-934473781
+  BUILDKIT_PROGRESS: plain
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - name: Run
+        uses: ./.github/actions/run_pre_commit
+        with:
+          is-origin-repo: "true"
+      - name: Report failure
+        if: failure() && github.event_name == 'schedule'
+        uses: ./.github/actions/report_action_failure
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

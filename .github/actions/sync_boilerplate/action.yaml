@@ -1,0 +1,136 @@
+# Copier itself provide an action for making update with boilerplate
+# https://copier.readthedocs.io/en/stable/updating/
+
+# But we create our own action with some differences:
+# - Add ssh-agent action for accessing private boilerplate
+# - Use Github App to generate token for creating PR
+# - Just create one PR for updating the changes with boilerplate
+
+name: Sync with boilerplate
+description: "Sync with boilerplate and create PR."
+inputs:
+  python-version:
+    description: "Version of python"
+    required: false
+    default: ""
+  boilerplate-ssh:
+    description: "SSH Key to access boilerplate(if needed)"
+    required: false
+    default: ""
+  app-id:
+    description: "App id which will create PR"
+    required: true
+  app-private-key:
+    description: "Private key of app which will create PR"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
+    - name: Setup python
+      uses: saritasa-nest/saritasa-python-open-source-boilerplate/.github/actions/setup_python@main
+      with:
+        version: ${{ inputs.python-version }}
+        cache-pre-commit: false
+        cache-mypy: false
+    - name: Set up ssh-agent
+      uses: webfactory/ssh-agent@v0.9.1
+      if: ${{ inputs.boilerplate-ssh != '' }}
+      with:
+        ssh-private-key: ${{ inputs.boilerplate-ssh }}
+    - name: Update ssh hostkey
+      shell: bash
+      if: ${{ inputs.boilerplate-ssh != '' }}
+      run: |
+        ssh-keyscan github.com > ~/.ssh/known_hosts
+    - name: Get before sync commit hash
+      id: commit-before
+      shell: bash
+      run: |
+        echo "template=$(docker run -i --rm mikefarah/yq '._src_path' < .copier-answers.yml | sed 's|git@github.com:|https://github.com/|' | sed 's|\.git||')" >> "$GITHUB_OUTPUT"
+        echo "commit=$(docker run -i --rm mikefarah/yq '._commit' < .copier-answers.yml)" >> "$GITHUB_OUTPUT"
+    - name: Sync boilerplate
+      id: sync
+      shell: bash
+      run: |
+        poetry run copier update --vcs-ref main --skip-answered --trust --skip-tasks
+    - name: Get after sync commit hash
+      id: commit-after
+      shell: bash
+      run: |
+        echo "commit=$(docker run -i --rm mikefarah/yq '._commit' < .copier-answers.yml)" >> "$GITHUB_OUTPUT"
+    - name: Check for conflicts
+      id: check-for-conflicts
+      shell: bash
+      # Check for files with seven < or > or = (merge conflicts)
+      run: |
+        echo "conflicts=$(git grep -En '^<{7}$|^>{7}$|^={7}$' | wc -l)" >> "$GITHUB_OUTPUT"
+        echo "changed_files=$(git status --short | wc -l)" >> "$GITHUB_OUTPUT"
+        echo "is_pyproject_changed=$(git status --short | grep "pyproject.toml" | wc -l)" >> "$GITHUB_OUTPUT"
+        git add .
+    - name: Update lock file
+      shell: bash
+      if: steps.check-for-conflicts.outputs.is_pyproject_changed == 1
+      continue-on-error: true
+      run: |
+        uv lock
+    - name: Generate token
+      # Docs for action: https://github.com/marketplace/actions/github-app-token
+      uses: tibdex/github-app-token@v2
+      id: generate-token
+      with:
+        app_id: ${{ inputs.app-id }}
+        private_key: ${{ inputs.app-private-key }}
+    # Docs for action: https://github.com/marketplace/actions/create-pull-request
+    - name: Create Pull Request for successful sync
+      if: steps.check-for-conflicts.outputs.conflicts == 0 && steps.check-for-conflicts.outputs.changed_files > 1
+      uses: peter-evans/create-pull-request@v8
+      with:
+        token: ${{ steps.generate-token.outputs.token }}
+        commit-message: "[automated-commit] Sync with boilerplate"
+        title: Sync with boilerplate
+        body: |
+          Created by GitHub Actions
+
+          Changes in boilerplate:
+          ${{ steps.commit-before.outputs.template }}/compare/${{ steps.commit-before.outputs.commit }}...${{ steps.commit-after.outputs.commit }}
+
+        base: ${{ github.event.repository.default_branch }}
+        labels: automated-pr
+        branch: feature/manual-sync-boilerplate
+        delete-branch: true
+    - name: Create Pull Request for failed sync
+      uses: peter-evans/create-pull-request@v8
+      if: steps.check-for-conflicts.outputs.conflicts > 0
+      with:
+        token: ${{ steps.generate-token.outputs.token }}
+        commit-message: "[automated-commit] Sync with boilerplate"
+        title: "[FIX REQUIRED] Sync with boilerplate"
+        body: |
+          Conflicts occurred when updating changes with boilerplate using [Copier](https://copier.readthedocs.io/en/stable/)
+          Please resolve this manually using below workflow:
+          - Close this PR
+          - Checkout default (`${{ github.event.repository.default_branch }}`) branch
+          - Start new branch, like this
+            ```console
+            git checkout -b feature/manual-sync-boilerplate
+            ```
+          - Run
+            ```console
+            uvx copier update --vcs-ref main --skip-answered --trust --skip-tasks
+            ```
+          - Resolve conflicts
+          - Create PR as usual
+
+          Changes in boilerplate:
+          ${{ steps.commit-before.outputs.template }}/compare/${{ steps.commit-before.outputs.commit }}...${{ steps.commit-after.outputs.commit }}
+
+        base: ${{ github.event.repository.default_branch }}
+        labels: |
+          automated-pr
+          invalid
+          manually-fix-needed
+        branch: feature/manual-sync-boilerplate
+        delete-branch: true
