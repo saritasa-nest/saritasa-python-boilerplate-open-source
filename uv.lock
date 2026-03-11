@@ -31,7 +31,7 @@ wheels = [
 
 [[package]]
 name = "copier"
-version = "9.11.1"
+version = "9.13.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "colorama" },
@@ -48,9 +48,9 @@ dependencies = [
     { name = "pyyaml" },
     { name = "questionary" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/3a/e5/c9183751006ab59f5d968988056ea4219e2eaf7c79705172751100c4ebf4/copier-9.11.1.tar.gz", hash = "sha256:50e5a39b7dde94ad7a3b66b5a64070359df532c13d64dabb89dde81f7c7347eb", size = 592118, upload-time = "2026-01-10T14:14:13.188Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ea/fb/20f865f01fc972890b5db372f7d29bc5caebb978eda0d75df0fd12aaf3bf/copier-9.13.1.tar.gz", hash = "sha256:698ff6e053de7e7a4685423cadce3cbd7638dc9d5877aae44d714a8478ce00e4", size = 615489, upload-time = "2026-03-09T12:15:50.537Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/9a/a0/ddaaa460f0eb7b16422e16217d9f3b915aee630f2b06d438f0d77eee47a8/copier-9.11.1-py3-none-any.whl", hash = "sha256:e23c4b3c0c1687c519d8ae62496507164cc482b96af9e3ea7851ce02b64eb978", size = 56379, upload-time = "2026-01-10T14:14:11.445Z" },
+    { url = "https://files.pythonhosted.org/packages/a6/11/21bd3150e4f024b9c548a898e3935a55188a078b3f4efd54d553943e1f8d/copier-9.13.1-py3-none-any.whl", hash = "sha256:c3c88965b9f1420523bfc0a56c2f9b23d3b33c460e8484eb63c91cd20f5a240b", size = 59367, upload-time = "2026-03-09T12:15:48.744Z" },
 ]
 
 [[package]]
@@ -388,15 +388,15 @@ wheels = [
 
 [[package]]
 name = "saritasa-invocations"
-version = "1.9.0"
+version = "1.10.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "invoke" },
     { name = "rich" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a1/59/a4e0ffda43773a61f98547fe068c0f86ae1e08b8b73af78cfac6b5256f8a/saritasa_invocations-1.9.0.tar.gz", hash = "sha256:6601bd507f83811a4be1229a49afd3285fb40373d9e4c73a36fe77bf48d2041d", size = 36730, upload-time = "2026-01-09T07:46:31.568Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a4/39/3117e4844953320595e21edd5971ca0784e9c1ab94e7e97a053003dfe3ad/saritasa_invocations-1.10.0.tar.gz", hash = "sha256:a9829c025b27122971e6a0b42ff0b1172885a55269ac63eabb8059d475370b2c", size = 37079, upload-time = "2026-03-02T10:55:47.834Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/36/9a/22f2817bd99925a669f82079d28abb5dc49c55a014e7826e75a159cb9af1/saritasa_invocations-1.9.0-py3-none-any.whl", hash = "sha256:837493fc7988b2b76cb6802960e36504afcaadcef1d47634773001754e3b7a64", size = 38876, upload-time = "2026-01-09T07:46:29.853Z" },
+    { url = "https://files.pythonhosted.org/packages/d9/20/1b2d4dc98a9e60453ee7b621821499281b47057c96b156509d7123357ef6/saritasa_invocations-1.10.0-py3-none-any.whl", hash = "sha256:1e539edaeac339962927995a87d894aa0a4f2612f256ae3ed1dd77b41fe35648", size = 39238, upload-time = "2026-03-02T10:55:46.554Z" },
 ]
 
 [[package]]
@@ -411,9 +411,9 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "copier", specifier = "==9.11.1" },
+    { name = "copier", specifier = "==9.13.1" },
     { name = "pre-commit", specifier = "==4.5.1" },
-    { name = "saritasa-invocations", specifier = "==1.9.0" },
+    { name = "saritasa-invocations", specifier = "==1.10.0" },
 ]
 
 [[package]]
