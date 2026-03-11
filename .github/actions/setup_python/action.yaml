@@ -24,12 +24,6 @@ runs:
       id: set-cache-prefix
       shell: bash
       run: echo "cache-prefix=${{ runner.os }}-${{ github.job }}-${{ steps.setup-uv.outputs.python-version }}" >> $GITHUB_OUTPUT
-    - name: Cache venv
-      id: cache-venv
-      uses: actions/cache@v5
-      with:
-        path: .venv
-        key: ${{ steps.set-cache-prefix.outputs.cache-prefix }}-venv-${{ hashFiles('**/uv.lock') }}
     - name: Cache pre-commit
       uses: actions/cache@v5
       with:
