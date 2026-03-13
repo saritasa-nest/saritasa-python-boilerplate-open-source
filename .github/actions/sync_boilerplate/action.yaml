@@ -29,12 +29,18 @@ runs:
     - uses: actions/checkout@v6
       with:
         fetch-depth: 0
+    - name: Configure Git Credentials
+      shell: bash
+      # Set git user for commits
+      # Email: ID+USERNAME@users.noreply.github.com
+      # https://api.github.com/users/github-actions[bot]
+      run: |
+        git config user.name github-actions[bot]
+        git config user.email 41898282+github-actions[bot]@users.noreply.github.com
     - name: Setup python
       uses: saritasa-nest/saritasa-python-open-source-boilerplate/.github/actions/setup_python@main
       with:
         version: ${{ inputs.python-version }}
-        cache-pre-commit: false
-        cache-mypy: false
     - name: Set up ssh-agent
       uses: webfactory/ssh-agent@v0.9.1
       if: ${{ inputs.boilerplate-ssh != '' }}
@@ -55,7 +61,7 @@ runs:
       id: sync
       shell: bash
       run: |
-        poetry run copier update --vcs-ref main --skip-answered --trust --skip-tasks
+        uv run copier update --vcs-ref main --skip-answered --trust --skip-tasks
     - name: Get after sync commit hash
       id: commit-after
       shell: bash

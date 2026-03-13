@@ -8,6 +8,7 @@ def prepare(context: invoke.Context) -> None:
     saritasa_invocations.print_success("Preparing CI")
     saritasa_invocations.uv.sync(context)
 
+
 @invoke.task
 def run_pre_commit(context: invoke.Context) -> None:
     """Run pre-commit hooks."""
