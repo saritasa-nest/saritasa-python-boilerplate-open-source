@@ -38,6 +38,20 @@ linters = [
     # https://mypy.readthedocs.io/en/stable/
     "mypy>0",
 ]
+docs = [
+  # Project documentation with Markdown.
+  # https://www.mkdocs.org/
+  "mkdocs>0",
+  # A powerful documentation framework on top of MkDocs
+  # https://squidfunk.github.io/mkdocs-material/
+  "mkdocs-material>0",
+  # Automatic documentation from sources, for MkDocs
+  # https://mkdocstrings.github.io/
+  "mkdocstrings[python]>0",
+  # Manage multiple versions of your MkDocs-powered documentation
+  # https://github.com/jimporter/mike
+  "mike>0",
+]
 
 [project.urls]
 Homepage = "https://pypi.org/project/{{ package_name }}/"
