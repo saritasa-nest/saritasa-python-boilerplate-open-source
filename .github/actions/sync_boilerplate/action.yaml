@@ -42,7 +42,7 @@ runs:
       with:
         version: ${{ inputs.python-version }}
     - name: Set up ssh-agent
-      uses: webfactory/ssh-agent@v0.9.1
+      uses: webfactory/ssh-agent@v0.10.0
       if: ${{ inputs.boilerplate-ssh != '' }}
       with:
         ssh-private-key: ${{ inputs.boilerplate-ssh }}
