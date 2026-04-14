@@ -54,10 +54,20 @@ docs = [
 ]
 
 [project.urls]
-Homepage = "https://pypi.org/project/{{ package_name }}/"
-Documentation = "https://{{ package_name }}.readthedocs.io/en/latest/"
-Repository = "https://github.com/saritasa-nest/{{ package_name }}/"
-Changelog = "https://github.com/saritasa-nest/{{ package_name }}//blob/main/CHANGELOG.md"
+Documentation = "https://saritasa-nest.github.io/{{ package_name }}/"
+Repository = "https://github.com/saritasa-nest/{{ package_name }}"
+Changelog = "https://saritasa-nest.github.io/{{ package_name }}/changelog/"
+Releases = "https://saritasa-nest.github.io/{{ package_name }}/releases/"
+"Bug Tracker" = "https://github.com/saritasa-nest/{{ package_name }}/issues/"
+Contributing ="https://saritasa-nest.github.io/{{ package_name }}/contributing/"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+[tool.hatch.build.targets.wheel]
+packages = [
+  "import_export_extensions"
+]
 
 [tool.ruff]
 line-length = 79

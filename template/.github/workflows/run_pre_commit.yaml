@@ -4,9 +4,7 @@ on:
   pull_request:
   push:
     branches: [
-      main,
-      staging,
-      develop
+      main
     ]
 
 concurrency:
