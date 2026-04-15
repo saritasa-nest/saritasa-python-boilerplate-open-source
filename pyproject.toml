@@ -14,13 +14,13 @@ classifiers = [
 dependencies = [
     # A library and CLI app for rendering project templates.
     # https://copier.readthedocs.io/en/latest/
-    "copier==9.14.1",
+    "copier==9.14.3",
     # Collection of invoke commands used by Saritasa
     # Invoke is a Python (2.7 and 3.4+) task execution tool & library,
     # drawing inspiration from various sources to arrive at a powerful & clean feature set.
     # http://www.pyinvoke.org/
     # https://github.com/saritasa-nest/saritasa-python-invocations/
-    "saritasa-invocations==1.10.0",
+    "saritasa-invocations==1.11.0",
     # A framework for managing and maintaining multi-language pre-commit hooks.
     # https://pre-commit.com/
     "pre-commit==4.5.1",
