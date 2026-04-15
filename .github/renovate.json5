@@ -84,7 +84,6 @@
       automerge: false,
       matchFileNames: [
         "pyproject.toml",
-        "template/pyproject.toml",
         "uv.lock",
       ],
       schedule: [
