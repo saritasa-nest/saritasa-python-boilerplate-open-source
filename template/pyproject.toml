@@ -31,10 +31,10 @@ local = [
     "ipdb>0",
     # A framework for managing and maintaining multi-language pre-commit hooks.
     # https://pre-commit.com/
-    "pre-commit>0"
+    "pre-commit>0",
     # A library and CLI app for rendering project templates.
     # https://copier.readthedocs.io/en/latest/
-    "copier>0,
+    "copier>0",
 ]
 linters = [
     # Mypy is a static type checker for Python.
