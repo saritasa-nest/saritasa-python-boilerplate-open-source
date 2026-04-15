@@ -147,5 +147,12 @@
         "* 21 5 * *"
       ],
     },
+    {
+      enabled: false,
+      // Ignore template pyproject.toml
+      matchFileNames: [
+        "template/pyproject.toml",
+      ],
+    },
   ]
 }
