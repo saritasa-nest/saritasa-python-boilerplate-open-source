@@ -30,7 +30,7 @@ runs:
       shell: bash
       run: |
         TAG="${GITHUB_REF_NAME}"
-        VERSION=$(uv version --short)
+        VERSION=$(uvx hatch version)
         echo "Tag: $TAG | pyproject: $VERSION"
         if [ "$TAG" != "$VERSION" ]; then
           echo "::error::Git tag ($TAG) does not match pyproject version ($VERSION)" >&2
