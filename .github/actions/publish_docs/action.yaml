@@ -9,6 +9,8 @@ runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
     - name: Configure Git Credentials
       shell: bash
       # Set git user for commits
