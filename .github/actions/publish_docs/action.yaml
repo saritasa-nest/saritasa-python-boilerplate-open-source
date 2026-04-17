@@ -23,4 +23,4 @@ runs:
         version: ${{ inputs.python-version }}
     - name: Build and deploy documentation to GitHub Pages
       shell: bash
-      run: uv run mkdocs gh-deploy
+      run: uv run mike deploy --push --update-aliases latest
