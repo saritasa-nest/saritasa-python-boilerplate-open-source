@@ -27,6 +27,7 @@ runs:
       with:
         version: ${{ inputs.python-version }}
     - name: Ensure tag matches pyproject version
+      id: version-check
       shell: bash
       run: |
         TAG="${GITHUB_REF_NAME}"
