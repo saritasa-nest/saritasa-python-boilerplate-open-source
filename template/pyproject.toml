@@ -18,6 +18,11 @@ classifiers = [
     "Intended Audience :: Developers",
     "Operating System :: OS Independent",
     "Topic :: Software Development :: Libraries :: Python Modules",
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: {{ min_python_version | round(2) }}",
+    "Programming Language :: Python :: {{ min_python_version + 0.01 | round(2) }}",
+    "Programming Language :: Python :: {{ min_python_version + 0.02 | round(2) }}",
 ]
 requires-python = ">={{ min_python_version }}"
 dependencies = [
@@ -60,10 +65,10 @@ docs = [
 ]
 
 [project.urls]
-Documentation = "https://saritasa-nest.github.io/{{ package_name }}/"
+Documentation = "https://saritasa-nest.github.io/{{ package_name }}/latest/"
 Repository = "https://github.com/saritasa-nest/{{ package_name }}"
 Changelog = "https://saritasa-nest.github.io/{{ package_name }}/changelog/"
-Releases = "https://saritasa-nest.github.io/{{ package_name }}/releases/"
+Releases = "https://github.com/saritasa-nest/{{ package_name }}/releases/"
 "Bug Tracker" = "https://github.com/saritasa-nest/{{ package_name }}/issues/"
 Contributing ="https://saritasa-nest.github.io/{{ package_name }}/contributing/"
 
