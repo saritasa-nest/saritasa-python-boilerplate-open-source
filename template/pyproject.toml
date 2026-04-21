@@ -3,7 +3,7 @@ name = "{{ package_name }}"
 dynamic = [
   "version",
 ]
-description = ""
+description = "{{ package_description }}"
 authors = [
     {name = "Saritasa", email = "pypi@saritasa.com"}
 ]
