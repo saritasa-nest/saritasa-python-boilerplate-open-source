@@ -1,3 +1,5 @@
+import os
+
 import invoke
 import saritasa_invocations
 
@@ -19,7 +21,7 @@ ns = invoke.Collection(
 ns.configure(
     {
         "run": {
-            "pty": True,
+            "pty": os.environ.get("INVOKE_PTY", "true").lower() == "true",
             "echo": True,
         },
         "saritasa_invocations": saritasa_invocations.Config(
