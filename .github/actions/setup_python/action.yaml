@@ -38,4 +38,4 @@ runs:
     - name: Sync dependencies
       shell: bash
       if: steps.setup-uv.cache-hit != 'true'
-      run: uv sync --locked --all-groups
+      run: uv sync --locked --all-groups --all-extras
