@@ -24,8 +24,8 @@ jobs:
     environment:
       name: pypi
     permissions:
-      id-token: write # For Trusted Publishing
-      contents: read
+      id-token: write  # For Trusted Publishing
+      contents: write
     steps:
       - name: Run
         uses: saritasa-nest/saritasa-python-open-source-boilerplate/.github/actions/publish@main
