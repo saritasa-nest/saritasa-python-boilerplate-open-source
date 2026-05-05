@@ -5,6 +5,10 @@ inputs:
     description: "Version of python"
     required: false
     default: ""
+  pre-commit-name:
+    description: "Name of package used for pre-commit"
+    required: false
+    default: "prek"
 outputs:
   cache-prefix:
     description: "Prefix for cache"
@@ -28,8 +32,8 @@ runs:
     - name: Cache pre-commit
       uses: actions/cache@v5
       with:
-        path: ~/.cache/pre-commit
-        key: ${{ steps.set-cache-prefix.outputs.cache-prefix }}-pre-commit-${{ hashFiles('**/.pre-commit-config.yaml') }}
+        path: ~/.cache/${{ inputs.pre-commit-name }}
+        key: ${{ steps.set-cache-prefix.outputs.cache-prefix }}-${{ inputs.pre-commit-name }}-${{ hashFiles('**/.pre-commit-config.yaml') }}
     - name: Cache mypy
       uses: actions/cache@v5
       with:

@@ -21,5 +21,11 @@ ns.configure(
             "pty": os.environ.get("INVOKE_PTY", "true").lower() == "true",
             "echo": True,
         },
+        "saritasa_invocations": saritasa_invocations.Config(
+            pre_commit=saritasa_invocations.PreCommitSettings(
+                entry="prek",
+                default_hook_stage="pre-push",
+            ),
+        ),
     },
 )

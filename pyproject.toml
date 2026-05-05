@@ -21,7 +21,7 @@ dependencies = [
     # http://www.pyinvoke.org/
     # https://github.com/saritasa-nest/saritasa-python-invocations/
     "saritasa-invocations==1.12.1",
-    # A framework for managing and maintaining multi-language pre-commit hooks.
-    # https://pre-commit.com/
-    "pre-commit==4.6.0",
+    # A fast Git hook manager written in Rust, designed as a drop-in alternative to pre-commit, reimagined.
+    # https://prek.j178.dev/
+    "prek==0.3.12",
 ]

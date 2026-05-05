@@ -103,5 +103,5 @@ def create_and_init_and_commit(
         if commit:
             context.run(
                 ". .venv/bin/activate && "
-                "pre-commit run --hook-stage push --all-files",
+                "inv pre-commit.run-hooks",
             )
