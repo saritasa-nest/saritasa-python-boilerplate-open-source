@@ -38,7 +38,7 @@ local = [
   "ipdb",
   # A fast Git hook manager written in Rust, designed as a drop-in alternative to pre-commit, reimagined.
   # https://prek.j178.dev/
-  "prek==0.3.12",
+  "prek",
   # Collection of invoke commands which used in Saritasa organization
   # https://github.com/saritasa-nest/saritasa-python-invocations/
   "saritasa-invocations[env_settings]",
