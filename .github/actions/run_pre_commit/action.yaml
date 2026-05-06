@@ -17,6 +17,10 @@ inputs:
     description: Is it run on origin repo(To run action via file path, instead of git ref)
     required: false
     default: "false"
+  pre-commit-name:
+    description: "Name of package used for pre-commit"
+    required: false
+    default: "prek"
 runs:
   using: "composite"
   steps:
@@ -33,11 +37,13 @@ runs:
       uses: saritasa-nest/saritasa-python-open-source-boilerplate/.github/actions/setup_python@main
       with:
         version: ${{ inputs.python-version }}
+        pre-commit-name: ${{ inputs.pre-commit-name }}
     - name: Setup python
       if: inputs.is-origin-repo == 'true'
       uses: ./.github/actions/setup_python
       with:
         version: ${{ inputs.python-version }}
+        pre-commit-name: ${{ inputs.pre-commit-name }}
     - name: Prepare CI env
       shell: bash
       run: |
