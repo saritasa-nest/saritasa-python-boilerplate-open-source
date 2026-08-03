@@ -9,7 +9,7 @@ ns = invoke.Collection(
     invocations.ci,
     invocations.test,
     saritasa_invocations.git,
-    saritasa_invocations.poetry,
+    saritasa_invocations.uv,
     saritasa_invocations.pre_commit,
     saritasa_invocations.github_actions,
 )
