@@ -37,6 +37,10 @@ runs:
       run: |
         git config user.name github-actions[bot]
         git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+    - name: Setup python
+      uses: saritasa-nest/saritasa-python-open-source-boilerplate/.github/actions/setup_python@main
+      with:
+        version: ${{ inputs.python-version }}
     - name: Set up ssh-agent
       uses: webfactory/ssh-agent@v0.10.0
       if: ${{ inputs.boilerplate-ssh != '' }}
@@ -57,7 +61,7 @@ runs:
       id: sync
       shell: bash
       run: |
-        uvx run copier update --vcs-ref main --skip-answered --trust --skip-tasks
+        uvx copier update --vcs-ref main --skip-answered --trust --skip-tasks
     - name: Get after sync commit hash
       id: commit-after
       shell: bash
